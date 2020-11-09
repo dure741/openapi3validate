@@ -104,7 +104,7 @@ paths:
                   items:
                     type: string
                 current_user:
-                  type: integer
+                  type: string
         required: true
       responses:
         200:
