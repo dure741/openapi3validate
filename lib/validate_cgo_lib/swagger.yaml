@@ -1,0 +1,204 @@
+openapi: 3.0.1
+info:
+  title: 用户组管理API
+  description: 这是一个对用户组进行创建、修改、检索、和删除的API
+  contact:
+    name: huang hui
+    url: http://www.example.com/support
+    email: huanghui@zdns.cn
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: "3.11"
+# servers:
+#   - url: http://localhost:4567
+#   - url: http://127.0.0.1:4567
+#   - url: https://localhost:4567
+# security:
+#   - BasicAuth
+paths:
+  /user_groups:
+    get:
+      tags:
+      - userGroups
+      summary: 获取用户组的信息，按页显示
+      description: 获取用户组信息(详细描述)
+      parameters:
+      - name: page_num
+        in: query
+        description: 路径参数，请求的页数，int
+        schema:
+          type: string
+          pattern: ^x-
+      - name: page_size
+        in: query
+        description: 路径参数，请求页数包含元素个数
+        schema:
+          type: integer
+      - name: name
+        in: query
+        description: 查询参数，通过用户组名称查询用户组
+        schema:
+          type: string
+      responses:
+        200:
+          description: 操作成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resources:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: llllllllllllllllllllllllllllllll
+                        usergroup_name:
+                          type: string
+                        user_authorities:
+                          type: string
+                        authenticate:
+                          type: string
+                        access_ips:
+                          type: array
+                          items:
+                            type: string
+                  page_num:
+                    type: integer
+                    format: int64
+                  page_size:
+                    type: integer
+                    format: int64
+                  total_size:
+                    type: integer
+                    format: int64
+    post:
+      tags:
+      - userGroups
+      summary: 新建一个用户组
+      description: 新建一个用户组，在body中设置参数
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - access_ips
+              - current_user
+              - user_authorities
+              - usergroup_name
+              type: object
+              properties:
+                usergroup_name:
+                  type: string
+                  pattern: ^x-
+                  description: 描述可以写在这里
+                user_authorities:
+                  type: string
+                authenticate:
+                  type: string
+                access_ips:
+                  type: array
+                  items:
+                    type: string
+                current_user:
+                  type: integer
+        required: true
+      responses:
+        200:
+          description: 添加用户组成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  usergroup_name:
+                    type: string
+                  user_authorities:
+                    type: string
+                  authenticate:
+                    type: string
+                  access_ips:
+                    type: array
+                    items:
+                      type: string
+            text/html:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  usergroup_name:
+                    type: string
+                  user_authorities:
+                    type: string
+                  authenticate:
+                    type: string
+                  access_ips:
+                    type: array
+                    items:
+                      type: string
+        401:
+          description: Unauthorized
+          content: {}
+        422:
+          description: Unprocessble Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+            text/html:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+      x-codegen-request-body-name: usergruop_name
+  /user_groups/{id}:
+    delete:
+      tags:
+      - userGroups
+      summary: 删除特定用户组
+      description: 通过URL后缀参数{id}，删除特定用户组
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+  /apidoc:
+    get:
+      tags:
+        - apidoc
+      responses:
+        200:
+          description: 操作成功
+  /swagger.json:
+    get:
+      tags:
+        - swagger.json
+      responses:
+        200:
+          description: 操作成功
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
