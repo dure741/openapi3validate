@@ -8,7 +8,7 @@ require 'ffi'
 # The function: validate is implemented in this module: Openapi3Validate.
 module Openapi3Validate
   extend FFI::Library
-  ffi_lib 'validate_cgo_lib/validate_lib.so'
+  ffi_lib '/home/durui/.gem/ruby/gems/openapi3validate-1.0.0/lib/validate_cgo_lib/validate_lib.so'
   # validate 不处理指针
   # validate dosn't handle pointer
   attach_function :validate, [:string,:string,:string,:string], :strptr
