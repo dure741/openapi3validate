@@ -1,0 +1,29 @@
+{
+    "comment":{
+        "ps":"暂时命名代表分类：位置+原因",
+        "位置":[
+            "Body",
+            "Path",
+            "Query"
+            ],
+        "原因":[
+            "MatchRegularExpError  不匹配正则",
+            "InvalidType   不合规值",
+            "OverLimit 数值超限",
+            "KeyMissing 键值缺失"
+        ]
+    },
+
+    "BodyInvalidType":"你的请求体，有个字段类型错啦",
+    "BodyMatchRegularExpError":"body有字段不匹配正则",
+    "BodyOverLimit":"body有数值超限",
+    "BodyKeyMissing":"body少key",
+    "QueryMatchRegularExpError":"query不匹配正则",
+    "QueryInvalidType":"query类型错误",
+    "QueryOverLimit":"query数值超限",
+    "QueryKeyMissing":"query少key",
+    "PathMatchRegularExpError":"path不匹配正则",
+    "PathInvalidType":"path类型错误",
+    "PathOverLimit":"path数值超限",
+    "PathKeyMissing":"path少key"
+}

@@ -79,7 +79,7 @@ extern "C" {
 //因为Cgo，所以返回无法方便使用error，所以使用字符串，
 //返回 "" 表示没有验证到错误，返回长度非0的字符串则表示未通过验证出现了错误
 
-extern char* validate(char* p0, char* p1, char* p2, char* p3);
+extern char* validate(char* p0, char* p1, char* p2, char* p3, char* p4);
 
 //release 用于释放 C.CString() 产生的内存地址，使用时必须在注释中导入 <stdlib.h>
 //需要搭配 unsafe 包使用
