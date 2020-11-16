@@ -17,29 +17,13 @@ module Openapi3Validate
   attach_function :release, [:pointer],:void
   # api_validate 中加入了处理指针的功能
   # api_validate can validate and handle pointer
-  def self.api_validate(request_method, request_url, request_body_str, swagger_spec_path, errmsgdef_path)
+  def self.api_validate(request, swagger_spec_path, errmsgdef_path)
+    request_method= request.request_method
+    request_url= request.url
+    request_body_str= request.body.read
     str, strptr = validate(request_method, request_url, request_body_str, swagger_spec_path, errmsgdef_path)
     release(strptr)
     str
   end
 end
-#---
-# 使用：
-# Usage:
-# Openapi3Validate::validate(requestMethod,requestURL,requestBodyStr,swaggerSpecPath)
-# Openapi3Validate::release(pointer)
-# puts Openapi3Validate::apiValidate(requestMethod,requestURL,requestBodyStr,swaggerSpecPath)
 
-#---
-# class Test
-#     extend Openapi3Validate
-#     def initialize
-#         @a="a"
-#         @b="b"
-#         @c="c"
-#         @d="d"
-#     end
-#     def te
-#         Openapi3Validate::apiValidate(@a,@b,@c,@d)
-#     end
-# end

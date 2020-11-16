@@ -17,7 +17,10 @@ module Test
   attach_function :release, [:pointer],:void
   # api_validate 中加入了处理指针的功能
   # api_validate can validate and handle pointer
-  def self.api_validate(request_method, request_url, request_body_str, swagger_spec_path, errmsgdef_path)
+  def self.api_validate(request, swagger_spec_path, errmsgdef_path)
+    request_method= request.request_method
+    request_url= request.url
+    request_body_str= request.body.read
     str, strptr = validate(request_method, request_url, request_body_str, swagger_spec_path, errmsgdef_path)
     release(strptr)
     str
