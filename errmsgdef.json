@@ -10,7 +10,14 @@
             "MatchRegularExpError  不匹配正则",
             "InvalidType   不合规值",
             "OverLimit 数值超限",
-            "KeyMissing 键值缺失"
+            "KeyMissing 键值缺失",
+            "ValueNotAllowed 不匹配枚举",
+            "OverLength 字符串长度超限",
+            "未完成错误信息：字符串长度超限，不匹配枚举，正则编译错误(可选)",
+            "Request body has an error: doesn't match the schema: Error at \"/filter_aaaa\":JSON value is not one of the allowed values",
+            "Parameter 'with_add' in query has an error: JSON value is not one of the allowed values",
+            "Parameter 'search_attrs[name|comment]' in query has an error: Maximum string length is 32",
+            "Request body has an error: doesn't match the schema: Error at \"/name\":Maximum string length is 32"
         ]
     },
 
@@ -18,12 +25,18 @@
     "BodyMatchRegularExpError":"body有字段不匹配正则",
     "BodyOverLimit":"body有数值超限",
     "BodyKeyMissing":"body少key",
+    "BodyValueNotAllowed":"body字符串不匹配枚举",
+    "BodyOverLength":"body字符串长度超限",
     "QueryMatchRegularExpError":"query不匹配正则",
     "QueryInvalidType":"query类型错误",
     "QueryOverLimit":"query数值超限",
     "QueryKeyMissing":"query少key",
+    "QueryValueNotAllowed":"query值不在枚举中",
+    "QueryOverLength":"query字符串长度超限",
     "PathMatchRegularExpError":"path不匹配正则",
     "PathInvalidType":"path类型错误",
     "PathOverLimit":"path数值超限",
-    "PathKeyMissing":"path少key"
+    "PathKeyMissing":"path少key",
+    "PathValueNotAllowed":"path值不在枚举中",
+    "PathOverLength":"path字符串长度超限"
 }

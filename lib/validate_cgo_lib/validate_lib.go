@@ -92,7 +92,7 @@ func validate(Cmethod *C.char, Curl *C.char, CbodyData *C.char, CswaggerFilePath
 		e := &ErrorMessage{
 			ErrAPI: route.Path,
 		}
-		decodeerr := e.Decode(msg, errmsgdefPath)
+		decodeerr := e.Decode(getErrorFirstLine(msg), errmsgdefPath)
 		return C.CString(decodeerr.Error())
 	}
 	return C.CString("")
@@ -166,6 +166,8 @@ func (e *ErrorMessage) DecodeSrcError(srcerr string) error {
 		//Parameter 和 request body公用
 		doesntMatchRegExp := regexp.MustCompile("doesn't match the regular expression")
 		overLimit := regexp.MustCompile("Number must be")
+		valueNotAllowed := regexp.MustCompile("JSON value is not one of the allowed values")
+		overLength := regexp.MustCompile("imum string length is")
 		//Parameter 错误匹配
 		invalidType := make(map[string]*regexp.Regexp)
 		keyMissing := make(map[string]*regexp.Regexp)
@@ -192,12 +194,16 @@ func (e *ErrorMessage) DecodeSrcError(srcerr string) error {
 				e.Reason = "MatchRegularExpError"
 			case overLimit.MatchString(positionMsg[1]):
 				e.Reason = "OverLimit"
+			case valueNotAllowed.MatchString(positionMsg[1]):
+				e.Reason = "ValueNotAllowed"
+			case overLength.MatchString(positionMsg[1]):
+				e.Reason = "OverLength"
 			case invalidType[location].MatchString(positionMsg[1]):
 				e.Reason = "InvalidType"
 			case keyMissing[location].MatchString(positionMsg[1]):
 				e.Reason = "KeyMissing"
 			default:
-				return errors.New("Unconsitered error type")
+				return errors.New("Unconsitered error type: " + srcerr)
 			}
 
 			//判断出错的位置body
@@ -211,12 +217,16 @@ func (e *ErrorMessage) DecodeSrcError(srcerr string) error {
 				e.Reason = "MatchRegularExpError"
 			case overLimit.MatchString(positionMsg[1]):
 				e.Reason = "OverLimit"
+			case valueNotAllowed.MatchString(positionMsg[1]):
+				e.Reason = "ValueNotAllowed"
+			case overLength.MatchString(positionMsg[1]):
+				e.Reason = "OverLength"
 			case invalidType[location].MatchString(positionMsg[1]):
 				e.Reason = "InvalidType"
 			case keyMissing[location].MatchString(positionMsg[1]):
 				e.Reason = "KeyMissing"
 			default:
-				return errors.New("Unconsitered error type")
+				return errors.New("Unconsitered error type: " + srcerr)
 			}
 		} else {
 			return errors.New("Source string has more than 1 \"Request body '\" or \"Paramenter '\"")
