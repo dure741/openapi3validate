@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
     s.name        = 'openapi3validate'
-    s.version     = '1.0.1'
-    s.date        = '2020-11-16'
+    s.version     = '1.0.2'
+    s.date        = '2020-11-20'
     s.summary     = "Request validation by openapi3."
     s.description = "Request validation by openapi3. Use cgo DLL."
     s.authors     = ["Durui"]
